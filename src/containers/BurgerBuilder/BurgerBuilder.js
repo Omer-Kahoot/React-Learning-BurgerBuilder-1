@@ -30,6 +30,9 @@ class BurgerBuilder extends Component {
                 console.log(response);
             })
             .catch(error => {
+                this.setState({
+                    error : true
+                });
                 console.log(error);
             });
     }
@@ -140,7 +143,7 @@ class BurgerBuilder extends Component {
         }
 
         let orderSummary = null;           
-        let burger = <Spinner />;
+        let burger = this.state.error ? <p>Ingredients cannot be loaded.</p> : <Spinner />;
         if (this.state.ingredients) {
             burger = (
                 <Aux>
