@@ -25,7 +25,6 @@ const reducer = (state = initialState, action) => {
                 loading: false
             };
         case actionTypes.PURCHASE_BURGER_START:
-            console.log('reducer of purchase burger start');
             return {
                 ...state,
                 loading: true
