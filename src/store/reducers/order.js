@@ -14,28 +14,45 @@ const reducer = (state = initialState, action) => {
                 id: action.orderId
             }
             return {
-                ...state,                           
-                loading : false,
-                purchased : true,
-                orders : state.orders.concat(newOrder)
+                ...state,
+                loading: false,
+                purchased: true,
+                orders: state.orders.concat(newOrder)
             };
         case actionTypes.PURCHASE_BURGER_FAIL:
             return {
                 ...state,
-                loading : false
+                loading: false
             };
         case actionTypes.PURCHASE_BURGER_START:
             console.log('reducer of purchase burger start');
             return {
                 ...state,
-                loading : true
+                loading: true
             }
         case actionTypes.PURCHASE_INIT:
             return {
                 ...state,
-                purchased : false
+                purchased: false
             }
-        default : 
+
+        case actionTypes.FETCH_ORDERS_START:
+            return {
+                ...state,
+                loading: true
+            }
+        case actionTypes.FETCH_ORDERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                orders: action.orders
+            };
+        case actionTypes.FETCH_ORDERS_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+        default:
             return state;
 
     }
