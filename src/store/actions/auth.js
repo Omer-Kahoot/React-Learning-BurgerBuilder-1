@@ -63,7 +63,7 @@ export const checkAuthTimeout = (expirationTime) => {
     };
 }
 
-export const auth = (email, password, isSignup) => {
+/*export const auth = (email, password, isSignup) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -89,9 +89,18 @@ export const auth = (email, password, isSignup) => {
                  dispatch(authFail(err.response.data.error));
              })
     }
+}*/
+
+export const auth = (email, password, isSignup) => {
+    return {
+        type: actionTypes.AUTH_USER,
+        email: email,
+        password: password,
+        isSignup : isSignup  
+    }
 }
 
-export const authCheckState = () => {
+/*export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -106,5 +115,11 @@ export const authCheckState = () => {
                 dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime())/1000));
             }
         }
+    }
+}*/
+
+export const authCheckState = () => {
+    return {
+        type: actionTypes.AUTH_CHECK_STATE
     }
 }
