@@ -1,4 +1,4 @@
-import { put } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 import * as actionTypes from '../actions/actionTypes';
 import * as actions from '../actions/index';
 import { delay } from 'redux-saga/effects';
@@ -34,7 +34,9 @@ export function* authUserSaga(action) {
         const expirationDate = yield new Date(new Date().getTime() + res.data.expiresIn * 1000);
         yield localStorage.setItem('token', res.data.idToken);
         yield localStorage.setItem('expirationDate', expirationDate);
-        yield localStorage.setItem('userId', res.data.localId);
+        //yield localStorage.setItem('userId', res.data.localId);
+        //For testing saga functionality without executing code and just mocking.
+        yield call([localStorage, "setItem"], 'userId', res.data.localId);
         yield (put(actions.authSuccess(res.data.idToken, res.data.localId)));
         yield (put(actions.checkAuthTimeout(res.data.expiresIn)));
     } catch (err) {
