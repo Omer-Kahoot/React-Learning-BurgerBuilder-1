@@ -31,20 +31,36 @@ export const authFail = (error) => {
 };
 
 export const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expirationDate');
-    localStorage.removeItem('userId');    
+    //Now handling this with redux saga from watching inside saga files.
+    //localStorage.removeItem('token');
+    //localStorage.removeItem('expirationDate');
+    //localStorage.removeItem('userId');    
     return {
-        type: actionTypes.AUTH_LOGOUT
+        //type: actionTypes.AUTH_LOGOUT
+        type: actionTypes.AUTH_INITIATE_LOGOUT
     }
 }
 
-export const checkAuthTimeout = (expirationTime) => {
+export const logoutSucceed = () => {
+    return {
+        type : actionTypes.AUTH_LOGOUT
+    };
+}
+
+/*export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(()=>{
             dispatch(logout());
         }, expirationTime * 1000);
     }
+}*/
+
+//For doing it redux saga way.
+export const checkAuthTimeout = (expirationTime) => {
+    return {
+        type: actionTypes.AUTH_CHECK_TIMEOUT,
+        expirationTime: expirationTime    
+    };
 }
 
 export const auth = (email, password, isSignup) => {
